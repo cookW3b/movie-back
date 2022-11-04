@@ -5,6 +5,7 @@ import express, { json } from 'express';
 import {data, genresArr, link} from './utils/getMovies.js';
 import {registerValidation, loginValidation} from './validations/UserValidation.js';
 import { UserController } from './controllers/index.js'
+import { checkAuth } from "./utils/checkAuth.js";
 
 mongoose
 	.connect(link)
@@ -17,7 +18,7 @@ app.use(express.json());
 app.post('/register', registerValidation, UserController.register);
 app.post('/login', loginValidation, UserController.login);
 
-app.post('/movies', async (req, res) => {
+app.post('/movies', checkAuth ,async (req, res) => {
 	try {
 		data.results.forEach(item => {
 			const getGen = () => {
