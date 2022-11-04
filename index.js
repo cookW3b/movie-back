@@ -18,7 +18,7 @@ app.use(express.json());
 app.post('/register', registerValidation, UserController.register);
 app.post('/login', loginValidation, UserController.login);
 
-app.post('/movies', checkAuth ,async (req, res) => {
+app.post('/movies', async (req, res) => {
 	try {
 		data.results.forEach(item => {
 			const getGen = () => {
